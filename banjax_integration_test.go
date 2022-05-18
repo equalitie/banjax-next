@@ -57,6 +57,9 @@ func TestProtectedResources(t *testing.T) {
 		// per_site_decision_lists
 		{"GET", prefix + "/", 200, ClientIP("90.90.90.90"), nil}, // allow
 		{"GET", prefix + "/", 401, ClientIP("91.91.91.91"), nil}, // challenge
+		// global_decision_lists
+		{"GET", prefix + "/", 200, ClientIP("20.20.20.20"), nil}, // allow
+		{"GET", prefix + "/", 401, ClientIP("8.8.8.8"), nil},     // challenge
 	})
 
 	reloadConfig(fixtureConfigTestReload)
@@ -64,7 +67,10 @@ func TestProtectedResources(t *testing.T) {
 		{"GET", "/info", 200, nil, []string{"2022-02-03"}},
 		{"GET", prefix + "wp-admin2", 401, randomXClientIP(), nil},
 		// per_site_decision_lists
-		{"GET", prefix + "/", 401, ClientIP("90.90.90.90"), nil}, // challenge
 		{"GET", prefix + "/", 200, ClientIP("91.91.91.91"), nil}, // allow
+		{"GET", prefix + "/", 401, ClientIP("90.90.90.90"), nil}, // challenge
+		// global_decision_lists
+		{"GET", prefix + "/", 200, ClientIP("8.8.8.8"), nil},     // allow
+		{"GET", prefix + "/", 401, ClientIP("20.20.20.20"), nil}, // challenge
 	})
 }
