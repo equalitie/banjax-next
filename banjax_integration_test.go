@@ -65,7 +65,7 @@ func TestProtectedResources(t *testing.T) {
 		{"GET", prefix + "/?challengeme", 200, randomXClientIP(), nil},
 	})
 
-	time.Sleep(2 * time.Second),
+	time.Sleep(2 * time.Second)
 	httpTester(t, []TestResource{
 		{"GET", prefix + "/?challengeme", 401, randomXClientIP(), nil}
 	})
@@ -84,7 +84,7 @@ func TestProtectedResources(t *testing.T) {
 		{"GET", prefix + "/?challengeme", 200, randomXClientIP(), nil},
 	})
 
-	time.Sleep(2 * time.Second),
+	time.Sleep(2 * time.Second)
 	httpTester(t, []TestResource{
 		{"GET", prefix + "/?challengeme", 200, randomXClientIP(), nil}
 	})
